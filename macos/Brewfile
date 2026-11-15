@@ -29,7 +29,7 @@ cask "dbx"
 cask "google-chrome"
 cask "iina"
 cask "orbstack"
-cask "prettyclean"
+cask "pearcleaner"
 cask "sublime-text"
 cask "visual-studio-code"
 
