@@ -39,7 +39,7 @@ ansible all -i inventory.ini -m ping
 Ansible 默认走 SSH，建议用密钥登录，避免在 inventory 里写密码。
 
 ```bash
-# 生成专用密钥（注释可写成 ansible，方便区分）
+# 在控制机生成专用密钥（注释可写成 ansible，方便区分）
 ssh-keygen -t ed25519 -C "ansible"
 
 # 将公钥拷到目标机（把 IP 换成实际地址）
