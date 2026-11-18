@@ -34,6 +34,25 @@ ansible --version
 ansible all -i inventory.ini -m ping
 ```
 
+## SSH 免密登录（推荐）
+
+Ansible 默认走 SSH，建议用密钥登录，避免在 inventory 里写密码。
+
+```bash
+# 生成专用密钥（注释可写成 ansible，方便区分）
+ssh-keygen -t ed25519 -C "ansible"
+
+# 将公钥拷到目标机（把 IP 换成实际地址）
+ssh-copy-id -i ~/.ssh/id_ed25519.pub root@xxx.xxx.xxx.xxx
+```
+
+说明：
+
+- 默认密钥路径为 `~/.ssh/id_ed25519`（私钥）和 `~/.ssh/id_ed25519.pub`（公钥）。
+- 多台机器重复执行 `ssh-copy-id` 即可。
+- 若密钥不叫默认名，inventory 里加：`ansible_ssh_private_key_file=~/.ssh/你的私钥`。
+- 拷贝完成后可测：`ssh root@xxx.xxx.xxx.xxx`，应无需输入密码。
+
 ## 快速开始
 
 ### 1. 编辑 inventory
