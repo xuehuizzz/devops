@@ -1,0 +1,70 @@
+---
+# 将本地项目目录同步到远程服务器指定路径
+# 用法:
+#   ansible-playbook -i inventory.ini sync_project.yml \
+#     -e "target_hosts=dev project_src=./myapp remote_dest=/opt/myapp"
+#
+# 常用变量（可用 -e 覆盖）:
+#   target_hosts  - inventory 中的主机组或主机名，默认 webservers
+#   project_src   - 本地源目录，默认 .
+#   remote_dest   - 远程目标目录，默认 /opt/app
+#   remote_owner  - 远程目录属主，默认 root
+#   remote_group  - 远程目录属组，默认 root
+#   delete_extra  - 是否删除目标端多余文件，默认 false（安全）
+
+- name: Sync project to remote hosts
+  hosts: "{{ target_hosts | default('webservers') }}"
+  gather_facts: true
+  vars:
+    project_src: "."
+    remote_dest: "/opt/app"
+    remote_owner: root
+    remote_group: root
+    delete_extra: false
+    # 不同步的目录/文件（可按项目调整）
+    rsync_excludes:
+      - ".git/"
+      - ".gitignore"
+      - ".env"
+      - ".env.*"
+      - "node_modules/"
+      - "__pycache__/"
+      - "*.pyc"
+      - ".venv/"
+      - "venv/"
+      - "target/"
+      - "dist/"
+      - ".idea/"
+      - ".vscode/"
+      - "*.log"
+
+  tasks:
+    - name: Ensure remote destination directory exists
+      ansible.builtin.file:
+        path: "{{ remote_dest }}"
+        state: directory
+        owner: "{{ remote_owner }}"
+        group: "{{ remote_group }}"
+        mode: "0755"
+
+    - name: Sync project files with rsync
+      ansible.posix.synchronize:
+        src: "{{ project_src }}/"
+        dest: "{{ remote_dest }}/"
+        recursive: true
+        delete: "{{ delete_extra }}"
+        rsync_opts: "{{ rsync_excludes | map('regex_replace', '^(.*)$', '--exclude=\\1') | list }}"
+      # 控制机执行 rsync，推到目标机
+      delegate_to: localhost
+
+    - name: Fix ownership on remote after sync
+      ansible.builtin.file:
+        path: "{{ remote_dest }}"
+        state: directory
+        owner: "{{ remote_owner }}"
+        group: "{{ remote_group }}"
+        recurse: true
+
+    - name: Show sync summary
+      ansible.builtin.debug:
+        msg: "Synced {{ project_src }} -> {{ inventory_hostname }}:{{ remote_dest }}"
