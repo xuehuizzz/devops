@@ -8,6 +8,10 @@
 
 ```text
 .
+├── ansible/             # Ansible 配置管理与项目同步
+│   ├── inventory.ini
+│   ├── sync_project.yml
+│   └── README.md
 ├── containers/          # 容器相关
 │   ├── docker/           # Docker 安装、常用命令、网络、Swarm、Dockerfile 示例等
 │   ├── k8s/              # Kubernetes 集群搭建（本地/生产）、资源创建、运维命令
@@ -23,9 +27,7 @@
 ├── monitoring/          # 监控相关
 ├── network/             # 网络相关
 ├── nginx/               # Nginx 配置与实践
-├── proxy/               # 代理相关
 ├── linux/               # Linux 系统运维笔记
-├── macos/               # macOS 相关
 ├── python/              # Python 环境与工具
 ├── go/                  # Go 开发环境与工具
 ├── java/                # Java / SDKMAN / Maven 等
@@ -41,10 +43,11 @@
 
 | 分类 | 说明 |
 |------|------|
+| **配置管理** | Ansible inventory、项目同步 playbook、常用命令 |
 | **容器** | Docker 安装与常用命令、网络模式、Swarm、Dockerfile 示例；K8s 本地/生产集群搭建、常用运维命令；Podman |
 | **数据库** | MySQL（安装、备份恢复、配置、工具）、PostgreSQL、Redis（含哨兵）、MongoDB、ArangoDB、DuckDB |
 | **日志与搜索** | ELK 完整 Docker Compose 部署与使用笔记 |
-| **Web / 代理** | Nginx、各类代理配置 |
+| **Web** | Nginx 配置与实践 |
 | **系统与运维** | Linux 常用操作、logrotate、监控相关 |
 | **开发环境** | Python / Go / Java / Node.js / Rust 环境搭建与工具链笔记 |
 | **其他** | SonarQube、Vault 等 |
