@@ -1,27 +1,8 @@
-# 安装
+# fnm 安装node
 ```bash
-# macos
-brew install node
-# ubuntu
-sudo apt update && sudo apt install nodejs npm
 
-# 验证安装
-node -v
-npm -v    # npm是 Node.js 的包管理器
-npx -v
-
-# 配置国内淘宝镜像
-npm config set registry https://registry.npmmirror.com
--------------------------------------------------------------------------------
-# 安装最新 LTS 版本
-nvm install --lts
-
-# 设置默认版本
-nvm alias default lts/*
-
-# 切换到默认版本
-nvm use default
 ```
+
 > 优先使用npx创建项目, 例如: npx create-next-app@latest report-system --typescript
 
 # <mark>pnpm</mark><sub>管理项目的依赖包</sub>
@@ -89,19 +70,6 @@ yarn upgrade <package>  # 更新指定依赖
 yarn list  # 
 yarn cache clean  # 清理缓存
 yarn start  # 启动项目
-```
-
-# nvm <sub>node版本管理工具</sub>
-```bash
-# 安装
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-exec $SHELL -l  # 加载环境变量, 安装脚本会自动添加到当前shell配置文件中
-
-# 常用命令
-nvm install 16  # 安装 Node.js 16.x 版本
-nvm use 16  # 切换到 Node.js 16.x
-nvm uninstall 16  # 删除指定版本
-nvm ls  # 列出已安装的版本
 ```
 
 # npm ci
