@@ -1,4 +1,4 @@
-# fnm 安装node
+# <mark>fnm</mark> 安装node
 ```bash
 # 安装并设置默认 LTS
 fnm install --lts --use
