@@ -1,5 +1,25 @@
 # fnm 安装node
 ```bash
+# 安装并设置默认 LTS
+fnm install --lts --use
+fnm default "$(fnm current)"
+
+# 验证
+node -v
+npm -v
+fnm current
+fnm list
+
+# 常用命令
+fnm install --lts --use  # 安装最新LTS并立即使用
+fnm use 20  # 切换版本
+fnm default 20  # 设置默认版本
+fnm current # 查看当前版本
+fnm list 或 fnm ls  # 列出已安装版本
+fnm list-remote 或 fnm ls-remote  # 列出远程可用版本,加 --lts 只看 LTS
+fnm uninstall 20  # 卸载版本
+fnm alias 20 my-node  # 创建别名
+fnm exec --using=20 node -v  # 执行指定版本
 
 ```
 
