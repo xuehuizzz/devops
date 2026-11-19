@@ -23,8 +23,6 @@ fnm exec --using=20 node -v  # 执行指定版本
 
 ```
 
-> 优先使用npx创建项目, 例如: npx create-next-app@latest report-system --typescript
-
 # <mark>pnpm</mark><sub>管理项目的依赖包</sub>
 ```bash
 npm install -g pnpm
