@@ -48,10 +48,10 @@ cd myproject
 uv venv -p 3.12
 uv python pin 3.12   # 将当前项目指定使用 Python 3.12 版本
 
-# 查看与卸载
-uv python list   # 查看安装了哪些python环境
-uv python install 3.12  # 安装指定版本
-uv python uninstall 3.12  # 卸载指定版本
+# 解释器安装与卸载
+uv python list   # 查看安装了哪些python解释器
+uv python install 3.12  # 安装指定版本python解释器
+uv python uninstall 3.12  # 卸载指定版本python解释器
 
 # 添加依赖（自动创建虚拟环境、更新 pyproject.toml 和 uv.lock）
 uv add requests
