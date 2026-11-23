@@ -46,6 +46,7 @@ cd myproject
 
 # 手动创建虚拟环境
 uv venv -p 3.12
+uv python pin 3.12   # 将当前项目指定使用 Python 3.12 版本
 
 # 添加依赖（自动创建虚拟环境、更新 pyproject.toml 和 uv.lock）
 uv add requests
