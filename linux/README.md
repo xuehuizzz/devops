@@ -84,8 +84,13 @@ tcpdump -nn "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"  # 查前三次握手, 分�
 ssh-keygen -t ed25519 -C "user email"    # ED25519（推荐，更安全）
 ssh-keygen -t rsa -b 4096 -C "user email"   # RSA（广泛支持）
 
+# 移除主机记录
+ssh-keygen -R  xxx.xxx.xxx.xxx
+ssh-keygen -f ~/.ssh/custom_known_hosts -R xxx.xxx.xxx.xxx
+
 # 设置免密登录, 将你的 SSH 公钥复制到远程服务器的授权密钥文件中, 就可以使用 SSH 密钥进行身份验证，而不需要每次登录时输入密码
 ssh-copy-id 用户名@远程主机
+ssh-copy-id -p 2222 用户名@远程主机  # 指定端口
 ```
 > `-C`选项是在`ssh-keygen`命令中添加一条**注释**到生成的SSH公钥中, 方便人类识别, 不影响SSH功能
 
