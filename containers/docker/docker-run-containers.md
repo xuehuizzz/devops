@@ -9,7 +9,7 @@
     -v /Users/xuehuizzz/db/mysql:/var/lib/mysql \
     -p 127.0.0.1:3306:3306 \
     --restart always \
-    mysql:8.4
+    mysql:9.7
     ```
 2. **postgresql**
   - ```bash
