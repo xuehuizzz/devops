@@ -11,7 +11,7 @@ CREATE TABLE xxx (
     status tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
     version int UNSIGNED NOT NULL DEFAULT 0 COMMENT '乐观锁版本号',
     remark varchar(255) DEFAULT NULL COMMENT '备注',
-    money decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '金额存储',
+    digit decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '数字类型',
     -- UNIQUE KEY idx_username (username),                                    -- 唯一索引
     -- KEY idx_email (email),                                                 -- 普通索引
     -- KEY idx_name_email (name, email),                                      -- 联合索引
