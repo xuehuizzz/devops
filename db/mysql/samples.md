@@ -31,7 +31,7 @@ CREATE TABLE xxx (
 > 9. 所有业务查询必须考虑 deleted_at
 > 10. 若选 UUIDv7 存 BINARY(16)
 
-> utf8mb4_0900_ai_ci 是 MySQL 8.0 中引入的一种字符集排序规则（collation），它由几个部分组成:
+> utf8mb4_0900_ai_ci 自 MySQL 8.0 起作为 utf8mb4 的默认排序规则，并在 MySQL 9.x（含 9.7）中延续:
    - utf8mb4 : 字符集，支持完整的 Unicode 字符集，包括 emoji 表情符号和其他特殊字符（最多可存储 4 字节的 UTF-8 字符）
    - 0900 : 表示基于 Unicode 9.0.0 标准, 比旧版本的排序规则更加完善
    - ai : 代表 accent-insensitive (不区分重音), 例如 'a', 'á', 'à', 'ä' 在排序和比较时被视为相同字符, as(accent-sensitive)区分
