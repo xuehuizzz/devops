@@ -1,23 +1,24 @@
-## MySQL8 创建一张标准的数据表
+## MySQL9 创建一张标准的数据表
 ```sql
 CREATE TABLE xxx (
-    id bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',    -- BINARY(16) NOT NULL PRIMARY KEY COMMENT '分布式系统主键: uuid v7',      -- UUID v7
+    id bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增主键', 
+    -- id BINARY(16) NOT NULL PRIMARY KEY COMMENT '分布式系统主键: uuid v7',
     created_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间(UTC)',
     updated_at datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间(UTC)',
-    deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除,UTC), IS NUll(未删除), IS NOT NULL(已删除)',
+    deleted_at datetime(3) DEFAULT NULL COMMENT '删除时间(软删除,UTC), IS NULL(未删除), IS NOT NULL(已删除)',
     created_by bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建者ID，0=SYSTEM',
     updated_by bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新者ID，0=SYSTEM',
     deleted_by bigint UNSIGNED DEFAULT NULL COMMENT '删除者ID，NULL=未删除，0=SYSTEM，其他=用户ID',
     status tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
     version int UNSIGNED NOT NULL DEFAULT 0 COMMENT '乐观锁版本号',
     remark varchar(255) DEFAULT NULL COMMENT '备注',
-    digit decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '数字类型',
+    price decimal(12, 2) NOT NULL DEFAULT 0.00 COMMENT '数字类型',
     -- UNIQUE KEY uk_username (username),                                     -- 唯一索引
     -- KEY idx_email (email),                                                 -- 普通索引
     -- KEY idx_name_email (name, email),                                      -- 联合索引
     -- FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,          -- 物理外键,级联删除
     PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='一张相对规范的表结构(mysql8.x)';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='一张相对规范的表结构(mysql9.7)';
 ```
 > 1. 数据库时间统一使用 UTC
 > 2. DATETIME(3) 按 UTC 约定解释
@@ -28,7 +29,7 @@ CREATE TABLE xxx (
 > 7. deleted_at IS NULL 表示有效数据
 > 8. status 表示业务状态，不承担删除语义
 > 9. 所有业务查询必须考虑 deleted_at
-> 10. UUIDv7 与 AUTO_INCREMENT 二选一，由系统架构决定
+> 10. 若选 UUIDv7 存 BINARY(16)
 
 > utf8mb4_0900_ai_ci 是 MySQL 8.0 中引入的一种字符集排序规则（collation），它由几个部分组成:
    - utf8mb4 : 字符集，支持完整的 Unicode 字符集，包括 emoji 表情符号和其他特殊字符（最多可存储 4 字节的 UTF-8 字符）
